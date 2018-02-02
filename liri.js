@@ -11,3 +11,8 @@ var twitterClient = new Twitter(keys.twitter);
 var twitter = require('twitter');
 //Require Spotify
 var requireSpotify = require('node-spotify-api');
+
+//Capture Index 2 as Argument
+var theArg = process.argv[2];
+
+
