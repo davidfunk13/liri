@@ -47,11 +47,11 @@ function callSpotify() {
         type: 'track',
         query: songName
     }).then(function (response) {
-        console.log(response);
-        console.log(response.tracks.items[0])
-        for (var i = 0; i < response.tracks.items.length; i++) {
-            console.log({'Response: ' : response.tracks.items[i].album})
-        }
+        console.log({'Artists: ' : response.tracks.items[1].album.artists[0].name}, {'Preview Url: ': response.tracks.items[1].preview_url}, {'Song Name: ': response.tracks.items[1].name});
+        // console.log(response.tracks.items[0])
+        // for (var i = 0; i < response.tracks.items.length; i++) {
+        //     console.log({'Response: ' : response.tracks.items[i].album})
+        // }
     })
         .catch(function (err) {
             console.log(err);
