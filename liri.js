@@ -21,8 +21,10 @@ function callTwitter() {
             console.log('there was an error getting tweets');
             console.log(error);
         }
-        console.log(tweets);
-        console.log(response);
+        for (var i = 0; i < tweets.length; i++) {
+            console.log(tweets[i].text)
+        }
+        // console.log(response);
     } )
 };
 
