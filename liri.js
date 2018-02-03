@@ -1,32 +1,58 @@
 //Require Dotenv
 require("dotenv").config();
+
+// Require Request
+var request = require('request');
+
+//Require File System
+var fs = require('fs');
+
 //Require Twitter
 var twitter = require('twitter');
-//Require Keys
-var keys = require('./keys.js');
-//Reference to Keys
-// var spotify = new Spotify(keys.spotify);
-var twitterClient = new twitter(keys.twitter);
 
 //Require Spotify
 var requireSpotify = require('node-spotify-api');
+
+//Require Keys
+var keys = require('./keys.js');
+
+//Reference to Keys
+var spotify = new requireSpotify(keys.spotify);
+var twitterClient = new twitter(keys.twitter);
 
 //Capture Index 2 as Argument
 var theArg = process.argv[2];
 
 //Twitter Function
 function callTwitter() {
-    twitterClient.get('statuses/user_timeline', {screen_name: 'davefunk135'}, function (error, tweets, response) {
+    twitterClient.get('statuses/user_timeline', {
+        screen_name: 'davefunk135'
+    }, function (error, tweets, response) {
         if (error) {
             console.log('there was an error getting tweets');
             console.log(error);
         }
         for (var i = 0; i < tweets.length; i++) {
+            console.log('Heres user davefunk135s tweets:')
             console.log(tweets[i].text)
         }
         // console.log(response);
-    } )
+    })
 };
+
+//Spotify Functionality
+function callSpotify() {
+    var songName = process.argv[3]
+    spotify.search({
+        type: 'artists',
+        query: songName
+    }).then(function (response) {
+        console.log(response);
+    })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
 
 //Switch Case Scenarios for theArg
 switch (theArg) {
