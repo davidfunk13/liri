@@ -44,10 +44,14 @@ function callTwitter() {
 function callSpotify() {
     var songName = process.argv[3]
     spotify.search({
-        type: 'artists',
+        type: 'track',
         query: songName
     }).then(function (response) {
         console.log(response);
+        console.log(response.tracks.items[0])
+        for (var i = 0; i < response.tracks.items.length; i++) {
+            console.log({'Response: ' : response.tracks.items[i].album})
+        }
     })
         .catch(function (err) {
             console.log(err);
