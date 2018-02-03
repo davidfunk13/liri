@@ -44,15 +44,29 @@ function callTwitter() {
 function callSpotify() {
     var songName = process.argv[3]
     spotify.search({
-        type: 'track',
-        query: songName
-    }).then(function (response) {
-        console.log({'Artists: ' : response.tracks.items[1].album.artists[0].name}, {'Preview Url: ': response.tracks.items[1].preview_url}, {'Song Name: ': response.tracks.items[1].name});
-        // console.log(response.tracks.items[0])
-        // for (var i = 0; i < response.tracks.items.length; i++) {
-        //     console.log({'Response: ' : response.tracks.items[i].album})
-        // }
-    })
+            type: 'track',
+            query: songName
+        }).then(function (response) {
+            // console.log(response.tracks.items)
+            // console.log({'Artists: ' : response.tracks.items[1].album.artists[0].name}, {'Preview Url: ': response.tracks.items[1].preview_url}, {'Song Name: ': response.tracks.items[1].name});
+            //artistsloop
+            for (var i = 0; i < 5; i++) {
+                console.log('yoyo' + i)
+                console.log(
+                    {
+                    'Artist Name: ': response.tracks.items[i].artists[0].name
+                }
+                , {
+                    'Preview URL: ': response.tracks.items[i].preview_url
+                }, {
+                    'Song Name: ': response.tracks.items[i].name
+                },
+            {
+                'album: ' : response.tracks.items[i].album.name
+            }
+            );
+            };
+        })
         .catch(function (err) {
             console.log(err);
         });
