@@ -42,7 +42,7 @@ function callTwitter() {
 
 //Spotify Functionality
 function callSpotify(fileParam = 0) {
-    console.log(fileParam)
+    // console.log(fileParam)
     var songName = process.argv[3]
     spotify.search({
         type: 'track',
@@ -110,7 +110,7 @@ function callOmdb() {
         }
     })
 
-console.log(omdbQueryUrl);
+// console.log(omdbQueryUrl);
 
 }
 
@@ -121,18 +121,14 @@ function callTheFile() {
         if (error) {
             return console.log(error);
         }
-        console.log(data);
+        // console.log(data);
         var contentArray = data.split(",");
-
-        console.log(contentArray[0]);
-        console.log(contentArray[1]);
+        console.log('It says: ' + contentArray[0] + " " + contentArray[1])
         //Capture Index 2 as Argument
         var fileArg = contentArray[0];
         var fileParam = contentArray[1];
-        // switch(fileArg) {
-            // case 'spotify-this-song':
                 callSpotify(fileParam);
-        // }
+
     })
 }
 
