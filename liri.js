@@ -121,28 +121,26 @@ function callTheFile() {
         if (error) {
             return console.log(error);
         }
-        // console.log(data);
-        var contentArray = data.split(",");
-        console.log('It says: ' + contentArray[0] + " " + contentArray[1])
-        //Capture Index 2 as Argument
-        var fileArg = contentArray[0];
-        var fileParam = contentArray[1];
-                callSpotify(fileParam);
-
+        if (data.includes(',') === true) {
+            var contentArray = data.split(",");
+            console.log('it says: ' + contentArray[0] + contentArray[1])
+        }
+        if (data.includes(',') === false) {
+            var contentArray = data;
+            console.log('It says: ' + contentArray)
+        }
+// switch case?
     })
 }
 // functionality for writing to the file
 function writeToFile() {
     console.log('please place new file instructions in proper syntax, with a comma between command and param. Please Use SINGLE QUOTES for ENTIRE STRING, and DOUBLE QUOTES inside the single quotes arond the PARAM.')
     var newFileContent = process.argv [3];
-    fs.writeFile('random.txt', 'utf8', function (error, data) {
+    fs.writeFile('random.txt', newFileContent,'utf8', function (error, data) {
         if (error) {
             return console.log(error);
         }
-        var contentArray = newFileContent.split(",");
-        var fileArg = contentArray[0];
-        var fileParam = contentArray[1];
-        
+      console.log('File write complete! Now assuming your command is properly formatted, feel free to run do-what-it-says!')   
     })
 }
 
@@ -159,5 +157,8 @@ switch (theArg) {
         break;
     case 'do-what-it-says':
         callTheFile();
+        break;
+    case 'write-to-file':
+        writeToFile();
         break;
 }
