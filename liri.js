@@ -131,6 +131,20 @@ function callTheFile() {
 
     })
 }
+// functionality for writing to the file
+function writeToFile() {
+    console.log('please place new file instructions in proper syntax, with a comma between command and param. Please Use SINGLE QUOTES for ENTIRE STRING, and DOUBLE QUOTES inside the single quotes arond the PARAM.')
+    var newFileContent = process.argv [3];
+    fs.writeFile('random.txt', 'utf8', function (error, data) {
+        if (error) {
+            return console.log(error);
+        }
+        var contentArray = newFileContent.split(",");
+        var fileArg = contentArray[0];
+        var fileParam = contentArray[1];
+        
+    })
+}
 
 //Switch Case Scenarios for theArg
 switch (theArg) {
