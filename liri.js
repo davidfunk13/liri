@@ -75,8 +75,8 @@ function callSpotify(fileParam = 0) {
 }
 
 //function for omdb
-function callOmdb() {
-    var movieName = process.argv[3];
+function callOmdb(fileParam) {
+    var movieName = process.argv[3] || fileParam;
     var omdbQueryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
     request(omdbQueryUrl, function(error, response, body) {
         if (!error && response.statusCode === 200){
@@ -124,12 +124,25 @@ function callTheFile() {
         if (data.includes(',') === true) {
             var contentArray = data.split(",");
             console.log('it says: ' + contentArray[0] + contentArray[1])
+            if (contentArray[0].includes('spotify-this-song') === true) {
+                var fileParam = contentArray[1];
+                callSpotify(fileParam);
+            }
+            if (contentArray[0].includes('movie-this') === true) {
+                var fileParam = contentArray[1];
+                callOmdb(fileParam);
+            }
         }
         if (data.includes(',') === false) {
             var contentArray = data;
             console.log('It says: ' + contentArray)
+            if (contentArray.includes('my-tweets') === true) {
+                callTwitter();
+            }
+            else {
+                console.log('there was an error.');
+            }
         }
-// switch case?
     })
 }
 // functionality for writing to the file
